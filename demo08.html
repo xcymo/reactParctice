@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>props 和 render</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+        let Hello = React.createClass({
+            getInitialState:function(){
+                return {opacity:1.0,direc:false}
+            },
+            componentDidMount:function(){
+                    var opacity = this.state.opacity;
+                setInterval(function(){
+                    if(this.state.direc){
+                        opacity += 0.05;
+                    }else{
+                        opacity -= 0.05;
+                    }
+                    if(opacity>0.9){
+                        this.setState({direc:false})
+                    }
+                    if(opacity<0.1){
+                        this.setState({direc:true})
+                    }
+                    this.setState({opacity:opacity});
+                }.bind(this),20)
+            },
+            render:function(params) {
+                return (
+                    <div>
+                        <h2 style={{opacity:this.state.opacity}}>Hello {this.props.name}</h2>                                               
+                    </div>       
+                )
+            }
+        })
+        ReactDOM.render(<Hello name="阿薛"/>,document.getElementById("container"))
+    </script>
+    <script>
+        function class1() {
+            this.name = function () {
+                console.log("我是class1内的方法");
+            }
+        }
+        function class2() {
+            class1.call(this);  //此行代码执行后，当前的this指向了class1（也可以说class2继承了class1）   
+        }
+        var f = new class2();
+        f.name();
+    </script>
+</body>
+
+</html>
