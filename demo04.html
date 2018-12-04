@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="reactContainer"></div>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+    <script type="text/babel">
+       let hello = "哈喽";
+       let arr = [
+           <h1 key="1">{hello},hpl</h1>,
+           <h2 key="2">{hello},xcy</h2>,
+           <h3 key="3">{hello},zh</h3>
+       ];
+        ReactDOM.render(<div>{arr}</div>, document.getElementById("reactContainer"))
+    </script>
+</body>
+
+</html>

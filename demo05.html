@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>State</title>
+</head>
+
+<body>
+    <div id="reactContainer"></div>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+    <script type="text/babel">
+      let TextBox = React.createClass({
+            getInitialState:function() {
+                return {enable:false};  // 一定要有返回值
+            },
+            handlerClick:function(event){
+                this.setState({enable:!this.state.enable});  //改变state属性的时候，要用此方法 
+            },
+            render:function(){
+                return (
+                    <p>
+                        <input type="text" disabled={this.state.enable}/>
+                        <button onClick={this.handlerClick}>改变状态</button>  
+                    </p>
+                )
+            }
+      })
+      ReactDOM.render(<TextBox/>,document.getElementById("reactContainer"));
+    </script>
+</body>
+
+</html>

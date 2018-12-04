@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>props 和 render</title>
+</head>
+
+<body>
+    <div id="reactContainer"></div>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+    <script type="text/babel">
+        let HelloBox = React.createClass({
+            // render设计原则
+            // render中的内容，应该是最简单的组件体，html标签以及props
+            // 不要写交互、改变组件的state、读写dom信息
+            render:function(){
+                return (
+                    <div>
+                        {"Hello"+this.props.myAttr}
+                    </div>
+                );
+            }
+        });
+        let myName = "薛春云"
+        ReactDOM.render(<HelloBox myAttr={myName}/>,document.getElementById("reactContainer"))
+    </script>
+</body>
+
+</html>
