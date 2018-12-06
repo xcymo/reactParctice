@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>表单bind绑定</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script type="text/babel">
+      let MyComponent = React.createClass({
+          getInitialState:function(){
+              return {
+                    username: "阿薛",
+                    gender: "man",
+                    checked: true
+                  }
+          },
+          handleChange:function(name,event){
+             var newState = {};
+            //  es6 ==> 对象key值构建： 对象的key不确定时，赋值用object[key] = value
+             newState[name]=name=="checked"?event.target.checked:event.target.value;
+             this.setState(newState);
+             console.log(newState);
+          },
+          submitHandle:function(e){
+              e.preventDefault();
+              var is = this.state.checked?'是':'不是';
+              var gender = this.state.gender=="man"?"帅哥":"美女";
+              alert(this.state.username+is+gender);
+          },
+          render:function () {
+                return (
+                    <form onSubmit={this.submitHandle}>
+                        <label htmlFor="username">请输入您的姓名</label>
+                        <input type="text" name="username" id="username"
+                         value={this.state.username} onChange={this.handleChange.bind(this,"username")}
+                         ref="username" />
+                        <br/>
+                        <label htmlFor="checkbox">是或者否</label>
+                        <input type="checkbox" name="checkbox" id="checkbox" 
+                        checked={this.state.checked}  onChange={this.handleChange.bind(this,"checked")}/>
+                        <br/>                                                
+                        <label htmlFor="gender">请选择</label>
+                        <select id="gender" value={this.state.gender}  onChange={this.handleChange.bind(this,"gender")}>
+                            <option value="man">帅哥</option>
+                            <option value="woman">美女</option>
+                        </select>
+                        <button type="submit">提交</button>
+                    </form>
+                )
+          }
+      });
+    ReactDOM.render(<MyComponent/>,document.getElementById("container"));
+    </script>
+    <!-- <script>
+        var Man = function (name, age) {
+            this.name = name;
+            this.age = age;
+        }
+        var xcy = new Man("xcy", 12);
+        var ky = new Man("ky", 10);
+        xcy.sayName = function (arg) {
+            console.log(this.name + "**" + arg);
+        }
+        xcy.sayName("normal");
+        console.log("--------bind--------");
+        xcy.sayName.bind(ky, "bind")();
+        console.log("--------call--------");
+        xcy.sayName.call(ky, "bind");
+        console.log("--------apply--------");
+        xcy.sayName.apply(ky, ["apply"])
+    </script> -->
+</body>
+
+</html>

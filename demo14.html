@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>可控组件</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+</head>
+
+<body>
+    <h2>可控组件和this.state的值绑定，同时必须绑定onChange事件</h2>
+    <div id="container"></div>
+    <script type="text/babel">
+      let MyComponent = React.createClass({
+          getInitialState:function(){
+              return {value: "xcy"}
+          },
+          changeHandle:function(event){
+              this.setState({value:event.target.value});
+              console.log(this.state.value);
+          },
+         render:function () {
+                return (
+                    <div>
+                        <input type="text" value={this.state.value} onChange={this.changeHandle}/>    
+                    </div>
+                )
+         }
+      });
+    ReactDOM.render(<MyComponent/>,document.getElementById("container"));
+    </script>
+</body>
+
+</html>

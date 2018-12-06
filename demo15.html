@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>不可控组件</title>
+    <script src="./common/react.js"></script>
+    <script src="./common/react-dom.js"></script>
+    <script src="./common/browser.js"></script>
+</head>
+
+<body>
+    <h2>不可控组件的onChange事件需要用ref操作，dom中的value用defaultValue代替，否则不可更改。</h2>
+    <h1>不建议使用</h1>
+    <div id="container"></div>
+    <script type="text/babel">
+      let MyComponent = React.createClass({
+          handleChange(){
+              var value = ReactDOM.findDOMNode(this.refs.xcy);
+              value = this.refs.xcy.value;
+              console.log(value);
+          },
+         render(){
+             return (
+                 <div>
+                    <input ref="xcy" type="text" defaultValue="sdf" onChange={this.handleChange}/>    
+                </div>
+             )
+         }
+      });
+     ReactDOM.render(<MyComponent/>,document.getElementById("container"));
+    </script>
+</body>
+
+</html>
